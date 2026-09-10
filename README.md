@@ -131,3 +131,7 @@ DeepFace의 나이·감정 추정이나 시선 이동 휴리스틱은 실제 사
 - 메뉴·브랜드·광고·결제 관련 이미지 자산
 
 자세한 내용은 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)를 참고하세요.
+
+## 포트폴리오
+
+- Notion 프로젝트: https://app.notion.com/p/2c5f6964be61809fbfdff057ff34b1db
