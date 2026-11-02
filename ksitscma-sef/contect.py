@@ -412,12 +412,12 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 # UI 불러오기
-main_page_class = uic.loadUiType(resource_path('./UI/mega_ui_ver3.ui'))[0] # 메가 메인 UI 불러오기
-choose_option_class = uic.loadUiType(resource_path('./UI/mega_choose_option_page.ui'))[0] # 메가 음료옵션창 불러오기
-msg_box_class = uic.loadUiType(resource_path('./UI/msg_box.ui'))[0]  # 메세지박스 ui 불러오기
-point_page_class = uic.loadUiType(resource_path('./UI/point_page.ui'))[0] # 포인트페이지 창 띄우기
-manager_page_class = uic.loadUiType(resource_path('./UI/manager_page.ui'))[0] # 관리자페이지
-receipt_page = uic.loadUiType(resource_path('./UI/receipt_page_2.ui'))[0] # 영수증 창
+main_page_class = uic.loadUiType(resource_path('./ui/mega_ui_ver3.ui'))[0] # 메가 메인 UI 불러오기
+choose_option_class = uic.loadUiType(resource_path('./ui/mega_choose_option_page.ui'))[0] # 메가 음료옵션창 불러오기
+msg_box_class = uic.loadUiType(resource_path('./ui/msg_box.ui'))[0]  # 메세지박스 ui 불러오기
+point_page_class = uic.loadUiType(resource_path('./ui/point_page.ui'))[0] # 포인트페이지 창 띄우기
+manager_page_class = uic.loadUiType(resource_path('./ui/manager_page.ui'))[0] # 관리자페이지
+receipt_page = uic.loadUiType(resource_path('./ui/receipt_page_2.ui'))[0] # 영수증 창
 
 class Rept(QDialog, receipt_page):
     """영수증"""
@@ -497,7 +497,7 @@ class Point_Page(QDialog, point_page_class):
             self.close()
         else:
             self.close()
-            con = sqlite3.connect('./DATA/data.db')
+            con = sqlite3.connect('./data/data.db')
             df = pd.read_sql('select * from order_table', con)
             df.loc[:, 'customer_id'] = self.user_num
             df.to_sql('order_table', con, if_exists='replace', index=False)
@@ -688,13 +688,13 @@ class Option_Class(QDialog, choose_option_class):
         self.reset_btn.clicked.connect(self.btn_duplicates_check)  # 옵션 초기화 버튼
 
         # db불러오기
-        self.con = sqlite3.connect('./DATA/data.db')  # 데이터베이스 연결 정보 설정
+        self.con = sqlite3.connect('./data/data.db')  # 데이터베이스 연결 정보 설정
 
     def set_extra_charge(self):
         """버튼 누를 때마다 옵션 가격 추가해주는 부분"""
 
         # 옵션 가격 데이터 불러오기
-        option_price = pd.read_csv('./DATA/drinks_price.csv')
+        option_price = pd.read_csv('./data/drinks_price.csv')
         option_price_eng_name = option_price['eng_name'].to_list()
 
         # 눌린 버튼들 확인하기 및 라벨에 업데이트
@@ -840,7 +840,7 @@ class WindowClass(QMainWindow, main_page_class):
         # 메인화면 시작 ##################################################################################################
 
         # 0. DB 불러오기
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         self.price_df = pd.read_sql('select * from drinks_price', con)  # 가격 테이블
         self.menu_df = pd.read_sql('select * from drinks_menu', con)  # 음료상세정보 전체 테이블
         self.img_path_df = pd.read_sql('select * from drinks_img_path', con)  # 음료 이미지 경로 테이블
@@ -1323,7 +1323,7 @@ class WindowClass(QMainWindow, main_page_class):
 
     def get_discount_price(self):
         """할인된 금액 리턴"""
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_df = pd.read_sql('select * from order_table', con)
         if self.barcode_type == 'kt_discount':
             order_df.loc[0, 'discount_price'] = 1900
@@ -1341,7 +1341,7 @@ class WindowClass(QMainWindow, main_page_class):
 
     def payment_choose_signal(self):
         """결제수단 버튼에 따라 다른 정보 전달"""
-        payment_btn_df = pd.read_csv('./DATA/payment_choose.csv')  # csv 값 가져오기(결제버튼 정보)
+        payment_btn_df = pd.read_csv('./data/payment_choose.csv')  # csv 값 가져오기(결제버튼 정보)
         payment_choose_buttons = self.payment_choose_main_widget.findChildren(QPushButton)  # 결제창에 있는 모든 버튼 가져오기
         for btn in payment_choose_buttons:
             con1 = payment_btn_df['btn_name'] == btn.objectName()  # 버튼객체이름과 같은 버튼이라는 조건에 맞다면
@@ -1392,7 +1392,7 @@ class WindowClass(QMainWindow, main_page_class):
 
     def get_total_price(self):
         """총 가격 계산 및 반환"""
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_table_df = pd.read_sql('select * from order_table', con)
 
         # 총 가격 계산
@@ -1403,7 +1403,7 @@ class WindowClass(QMainWindow, main_page_class):
 
     def get_total_cnt(self):
         """총 갯수 계산 및 반환"""
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_table_df = pd.read_sql('select * from order_table', con)
         total_count = order_table_df['drink_cnt'].sum()
         return total_count
@@ -1441,7 +1441,7 @@ class WindowClass(QMainWindow, main_page_class):
 
     def move_to_payment_choose(self, state):
         """포장/매장 선택하는 것 db에 저장해주기"""
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_table_df = pd.read_sql('select * from order_table', con)
         order_table_df.loc[:, 'for_here_or_to_go'] = state
         order_table_df.to_sql('order_table', con, if_exists='replace', index=False)
@@ -1457,9 +1457,9 @@ class WindowClass(QMainWindow, main_page_class):
     def fill_the_table_widget(self, table):
         """테이블 위젯 채우기"""
         # 업데이트한 db불러오기
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_table_df = pd.read_sql('select * from order_table', con)
-        price_df = pd.read_csv('./DATA/drinks_price.csv')  # 가격 csv 도 불러오기(한글이름으로 비교)
+        price_df = pd.read_csv('./data/drinks_price.csv')  # 가격 csv 도 불러오기(한글이름으로 비교)
 
         # 테이블위젯 행 값 계산
         row = order_table_df['id'].count()
@@ -1502,7 +1502,7 @@ class WindowClass(QMainWindow, main_page_class):
         self.timer.stop()
 
         # 현재 db 연결
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_table_df = pd.read_sql('select * from order_table', con)
 
         total_price = self.get_total_price()  # 총 가격 계산
@@ -1542,7 +1542,7 @@ class WindowClass(QMainWindow, main_page_class):
         # 리스트 위젯 값 삭제
         self.drinks_cart_list_widget.clear()
 
-        conn = sqlite3.connect('./DATA/data.db')  # 데이터베이스 연결 정보 설정
+        conn = sqlite3.connect('./data/data.db')  # 데이터베이스 연결 정보 설정
         cur = conn.cursor()  # 커서 생성
         cur.execute("DELETE FROM 'order_table'")  # SQL 쿼리 실행
 
@@ -1635,7 +1635,7 @@ class WindowClass(QMainWindow, main_page_class):
         self.user_clicked_category = btn_name
 
         # 값 초기화
-        self.connn = sqlite3.connect('./DATA/data.db')
+        self.connn = sqlite3.connect('./data/data.db')
         self.menu_df = pd.read_sql('select * from drinks_menu', self.connn)  # 음료상세정보 전체 테이블
 
         category_drinks_num = len(self.menu_df[self.menu_df['category'] == btn_name])  # 카테고리 메뉴 갯수 세기

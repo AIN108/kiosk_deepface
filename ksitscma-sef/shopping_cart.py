@@ -78,7 +78,7 @@ class ShoppingItemWidget(QWidget):
 
 
             # db에서 수량 줄임
-            con = sqlite3.connect('./DATA/data.db')
+            con = sqlite3.connect('./data/data.db')
             order_df = pd.read_sql('select * from order_table', con)
             drinks_count = int(order_df.loc[order_df['id'] == self.idx_text, 'drink_cnt'].iloc[0]) - 1
             order_df.loc[order_df['id'] == self.idx_text, 'drink_cnt'] = drinks_count
@@ -99,7 +99,7 @@ class ShoppingItemWidget(QWidget):
 
 
         # db에서 수량 추가
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_df = pd.read_sql('select * from order_table', con)
         drinks_count = int(order_df.loc[order_df['id'] == self.idx_text, 'drink_cnt'].iloc[0]) + 1
         order_df.loc[order_df['id'] == self.idx_text, 'drink_cnt'] = drinks_count
@@ -117,7 +117,7 @@ class ShoppingItemWidget(QWidget):
         self.price_label.setText(str(new_price) + '원')
 
         # 합 구하기
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_df = pd.read_sql('select * from order_table', con)
         order_df['drink_cnt'] = order_df['drink_cnt'].astype(int)
         order_df['price'] = order_df['price'].astype(int)
@@ -138,7 +138,7 @@ class ShoppingItemWidget(QWidget):
         self.list_widget.takeItem(row)
 
         # db에서 id에 맞는 행 지워주기
-        con = sqlite3.connect('./DATA/data.db')
+        con = sqlite3.connect('./data/data.db')
         order_df = pd.read_sql('select * from order_table', con)
         order_df = order_df[order_df['id'] != self.index_label.text()]
         order_df.to_sql('order_table', con, if_exists='replace', index=False)
