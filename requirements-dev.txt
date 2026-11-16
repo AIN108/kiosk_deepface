@@ -1,0 +1,5 @@
+# offscreen Qt 스모크 테스트용 의존성. 카메라·얼굴·음성 라이브러리(deepface, dlib, opencv, pyttsx3,
+# SpeechRecognition)는 하드웨어가 필요해서 테스트에서는 스텁으로 대체한다.
+PyQt5>=5.15,<6
+pandas>=1.3,<4
+pytest>=8,<10
