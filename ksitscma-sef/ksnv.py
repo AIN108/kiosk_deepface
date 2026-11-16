@@ -461,7 +461,6 @@ class WindowClass(QMainWindow, main_page_class):
 
         #threading.Thread(target=self.continuous_face_analysis, args=(0,), daemon=True).start()
         #threading.Thread(target=self.continuous_eye_tracking, args=(1,), daemon=True).start()
-        self.home_button.clicked.connect(self.resetDigitalLiteracyStatus)
 
         # 오픈화면 #######################################################################################################
         self.stackedWidget.setCurrentIndex(0)  # 시작할때 화면은 오픈 페이지로 설정

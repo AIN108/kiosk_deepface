@@ -148,7 +148,8 @@ try:
     if mode == "camera":
         for delay in (500, 800, 1100):  # 홈 버튼을 세 번 누른다 (판정 초기화)
             QTimer.singleShot(delay, window.home_button.click)
-        QTimer.singleShot(2000, lambda: result.update(open_before_close=sorted(open_cameras())))
+        QTimer.singleShot(2000, lambda: result.update(open_before_close=sorted(open_cameras()),
+                                                      resets=getattr(window, "_detection_generation", None)))
         QTimer.singleShot(2200, window.close)
     if mode == "ks":
         QTimer.singleShot(300, window.dineInButton.click)

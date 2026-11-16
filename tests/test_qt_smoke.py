@@ -67,6 +67,7 @@ def test_ksnv_camera_threads_start_once_and_stop_on_close(app_copy):
     assert result["status"] == "ok", result
     assert result["errors"] == []
     assert result["open_before_close"] == [0, 1]
+    assert result["resets"] == 3  # 홈 버튼 한 번에 판정 초기화 한 번 (시그널 이중 연결 없음)
     assert result["opened"] == {"0": 1, "1": 1}
     assert result["open_after_close"] == []
     # cv2.imshow(HighGUI)는 메인(UI) 스레드에서만 호출한다
