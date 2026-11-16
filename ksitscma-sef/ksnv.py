@@ -881,17 +881,6 @@ class WindowClass(QMainWindow, main_page_class):
         cv2.destroyAllWindows()
     continuous_eye_tracking(1)
 '''
-    def setupVoiceRecognition(self):
-        self.recognizer = sr.Recognizer()
-        self.microphone = sr.Microphone()
-        # 음성 인식을 위한 스레드 시작
-        threading.Thread(target=self.listenForCommands, daemon=True).start()
-
-    def listenForCommands(self):
-        """음성 인식을 수행하고 인식된 명령을 처리하는 메서드"""
-        with self.microphone as source:
-            self.recognizer.adjust_for_ambient_noise(source)  # 배경 소음 조정
-
     def resetDigitalLiteracyStatus(self):
             """디지털 문맹자 검사 상태 초기화"""
             self.digital_literacy_detected = False
