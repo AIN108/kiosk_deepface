@@ -8,7 +8,7 @@
 - Upstream: https://github.com/davisking/dlib
 - License: Boost Software License 1.0
 
-저장소에 포함된 `dlib-19.22.99-cp38-cp38-win_amd64.whl`은 dlib 실행 바이너리 패키지입니다. dlib 자체의 이용 조건은 원 프로젝트의 Boost Software License를 따릅니다. 재배포 시에는 원본 프로젝트와 해당 배포물의 출처/빌드 경로를 별도로 확인하는 것이 권장됩니다.
+과거 저장소에 포함되었던 `dlib-19.22.99-cp38-cp38-win_amd64.whl`(현재는 추적하지 않으며 이전 커밋 이력에만 남아 있음)은 dlib 실행 바이너리 패키지입니다. dlib 자체의 이용 조건은 원 프로젝트의 Boost Software License를 따릅니다. 재배포 시에는 원본 프로젝트와 해당 배포물의 출처/빌드 경로를 별도로 확인하는 것이 권장됩니다.
 
 ## shape_predictor_68_face_landmarks.dat
 

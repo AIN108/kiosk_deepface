@@ -10,3 +10,5 @@ screenshot_*.png
 *.log
 .DS_Store
 Thumbs.db
+# 로컬에서 DB를 확인할 때 쓰던 Windows용 sqlite3 실행 파일 (저장소에서 추적하지 않음)
+ksitscma-sef/data/sqlite3.exe

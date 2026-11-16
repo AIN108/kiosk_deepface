@@ -43,7 +43,6 @@ kiosk_deepface/
     ├── sub_kiosk_1.py
     ├── QT_design.ui
     ├── shape_predictor_68_face_landmarks.dat
-    ├── dlib-19.22.99-cp38-cp38-win_amd64.whl
     ├── ui/
     ├── data/
     ├── img/
@@ -80,13 +79,9 @@ pip install -r requirements.txt
 
 `dlib`은 플랫폼과 Python 버전에 따라 설치 방식이 크게 달라지므로 `requirements.txt`에서 자동 설치하지 않습니다.
 
-저장소에는 과거 Windows CPython 3.8용으로 사용했던 다음 wheel이 보존되어 있습니다.
+과거 Windows CPython 3.8 환경에서는 `dlib-19.22.99-cp38-cp38-win_amd64.whl`을 `ksitscma-sef/`에 두고 설치했습니다. 이 wheel은 `.gitignore` 대상(`*.whl`)이라 더 이상 저장소에서 추적하지 않습니다(이전 커밋 이력에는 남아 있음). 사용 중인 Python 버전에 맞는 dlib을 별도로 설치하세요.
 
-```text
-ksitscma-sef/dlib-19.22.99-cp38-cp38-win_amd64.whl
-```
-
-이 바이너리의 출처/재배포와 dlib 모델의 이용 조건은 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)를 먼저 확인하세요.
+dlib 바이너리의 출처/재배포와 dlib 모델의 이용 조건은 [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md)를 먼저 확인하세요.
 
 ## 데이터와 UI
 
