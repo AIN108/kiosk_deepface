@@ -587,7 +587,7 @@ class WindowClass(QMainWindow, main_page_class):
 
         # 기타 스타일시트 변경 부분 ###############################################################################
         # 큐알코드 커서 변경해주기
-        self.qr_check_frame.setCursor(QCursor(QPixmap('./img/qt자료/bacord').scaled(80, 80)))
+        self.qr_check_frame.setCursor(QCursor(QPixmap('./img/qt자료/bacord.png').scaled(80, 80)))
         self.card_label.setCursor(QCursor(QPixmap('./img/qt자료/payment_phone.png').scaled(120, 100)))
         self.horizontalSlider.setCursor(QCursor(QPixmap('./img/qt자료/matercard.png').scaled(80, 70)))
 

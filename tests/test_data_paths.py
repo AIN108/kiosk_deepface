@@ -68,3 +68,11 @@ def test_cart_plus_button_updates_database(tmp_path):
     proc = subprocess.run([sys.executable, "-c", script], cwd=tmp_path, env=env,
                           capture_output=True, text=True, timeout=60)
     assert "drink_cnt 2" in proc.stdout, proc.stdout + proc.stderr
+
+
+@pytest.mark.parametrize("script", ["ksnv.py", "shopping_cart.py", "contect.py", "kiosk.py"])
+def test_relative_file_paths_name_existing_files(script):
+    # 파일 경로는 확장자까지 실제 파일 이름과 같아야 한다.
+    # (Qt는 확장자가 없으면 지원 형식의 확장자를 붙여 찾아 주지만, 그 동작에 기대지 않는다)
+    missing = [p for p in relative_path_literals(APP / script) if not exists_case_sensitive(APP, p)]
+    assert missing == [], f"{script}: 없는 파일 경로 {missing}"
